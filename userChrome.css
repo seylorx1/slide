@@ -1,3 +1,17 @@
+/* This Source Code Form (unless otherwise specified within blocks) is subject to the terms of the Mozilla Public
+* License, v. 2.0. If a copy of the MPL was not distributed with this
+* file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/*Created by Lyes Oussaiden (seylorx1) 2023.*/
+/*Version 1.*/
+
+
+
+
+
+
+/*************************************************************************/
+
 /*Used for setting variables.*/
 :root {
   /***********************************************************************/
@@ -14,27 +28,79 @@
   --sidebar-split-positionend: 0px;
 }
 
-/*TITLEBAR*/
-  /*Hides the titlebar (essentially encapsulates tabs and so on.*/
-  #titlebar {
-    visibility: collapse;
-  }
+/*************************************************************************/
 
-/*WINDOW CONTROLS*/
-  /*Allows the window controls to be positioned elsewhere.*/
-  #TabsToolbar .titlebar-buttonbox-container {
-    display: block;
-    position: absolute;
-    visibility: visible;
-  }
 
+
+
+
+
+/*WINDOW CONTROLS & TITLEBAR*/
   /* Detect Windows Firefox 25 or newer */
-  @media screen and (-moz-os-version) {
+  @media (-moz-platform: windows) {
 
+    /* This Source Code Form (FOR THIS BLOCK) is subject to the terms of the Mozilla Public
+    * License, v. 2.0. If a copy of the MPL was not distributed with this
+    * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+    /*
+    * This style will hide the tab bar and merge the title bar with the navigation bar. For Windows
+    * Make sure "Title Bar" is unchecked in customize menu.
+    *
+    * Contributor(s): Ivan0xFF
+    * Edited: Lyes Oussaiden (seylorx1)
+    * https://github.com/Timvde/UserChrome-Tweaks/blob/master/tabs/hide-tabs-windows.css 
+    */
+
+    .tabbrowser-tab,
+    #tabbrowser-arrowscrollbox,
+    #alltabs-button,
+    #TabsToolbar .titlebar-spacer {
+      display: none !important;
+    }
+    
+    #firefox-view-button {
+      height: 40px;
+      z-index: 1;
+    }
+    .TabsToolbar-customization-target {
+      max-width: 40px;
+    }
+
+    .titlebar-button {
+      height: 40px !important;
+    }
+    
+    #nav-bar {
+      margin-left: 60px;
+      margin-top: -42px;
+      margin-right: 160px;
+      box-shadow: none !important;
+    }
+    
+    [uidensity="compact"]:root .titlebar-button {
+      height: 32px !important;
+    }
+    
+    [uidensity="compact"]:root #nav-bar {
+      margin-top: -32px;
+    }
+    
+    #titlebar-buttonbox-container {
+      background-color: var(--chrome-secondary-background-color);
+    }
+    
+    .titlebar-color {
+      background-color: var(--toolbar-bgcolor);
+    }
+
+    #nav-bar toolbarbutton {
+      min-width: 40px;
+    }
   }
 
   /* Detect Mac Firefox 25 or newer */
-  @supports (-moz-osx-font-smoothing:auto) {
+  @supports (-moz-platform: macos) {
 
     /* This Source Code Form (FOR THIS BLOCK) is subject to the terms of the Mozilla Public
     * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -43,7 +109,7 @@
     /*
     * This style will hide the tab bar. For MacOS Big Sur
     * Contributor(s): Isaac-Newt, Ivan0xFF, millerdev, AMomchilov
-    * Edited: Lyes Oussaiden
+    * Edited: Lyes Oussaiden (seylorx1)
     * https://github.com/Timvde/UserChrome-Tweaks/blob/master/tabs/hide-tabs-macos.css 
     */
 
@@ -53,6 +119,17 @@
     #TabsToolbar .titlebar-buttonbox.titlebar-color { margin-left: 0px !important; }
     #main-window:not([inFullscreen]) #nav-bar { padding: 0px 0px 0px 70px !important; }
 
+    /*Allows the window controls to be positioned elsewhere.*/
+    #TabsToolbar .titlebar-buttonbox-container {
+      display: block;
+      position: absolute;
+      visibility: visible;
+    }
+
+    /*Hides the titlebar (essentially encapsulates tabs and so on.*/
+    #titlebar {
+      visibility: collapse;
+    }
   }
 
 /*SIDEBAR HEADER*/
@@ -75,9 +152,6 @@
     transition: all 300ms !important;
     opacity: 0.8 !important;
     max-width: 12px !important;
-  }
-  #sidebar-title {
-    content: "HEE!";
   }
 
 /*TREE STYLE TABS -- SIDEBAR HEADER*/
