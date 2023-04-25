@@ -1,0 +1,188 @@
+/*Used for setting variables.*/
+:root {
+  /***********************************************************************/
+  /*CONFIGURABLE VARIABLES*/
+  /*You can edit these to your heart's content without breaking anything.*/
+  --sidebar-split-min: 75px;
+  --sidebar-split-max: 300px;
+  --sidebar-switcher-close-margin: 16px;
+  /***********************************************************************/
+
+  /*These variables to calculate data across elements and are non-configurable.*/
+  /*I mean, you're an adult, you can do what you want.*/
+  --sidebar-split: var(--sidebar-split-min);
+  --sidebar-split-positionend: 0px;
+}
+
+/*TITLEBAR*/
+  /*Hides the titlebar (essentially encapsulates tabs and so on.*/
+  #titlebar {
+    visibility: collapse;
+  }
+
+/*WINDOW CONTROLS*/
+  /*Allows the window controls to be positioned elsewhere.*/
+  #TabsToolbar .titlebar-buttonbox-container {
+    display: block;
+    position: absolute;
+    visibility: visible;
+  }
+
+  /* Detect Windows Firefox 25 or newer */
+  @media screen and (-moz-os-version) {
+
+  }
+
+  /* Detect Mac Firefox 25 or newer */
+  @supports (-moz-osx-font-smoothing:auto) {
+
+    /* This Source Code Form (FOR THIS BLOCK) is subject to the terms of the Mozilla Public
+    * License, v. 2.0. If a copy of the MPL was not distributed with this
+    * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+    /*
+    * This style will hide the tab bar. For MacOS Big Sur
+    * Contributor(s): Isaac-Newt, Ivan0xFF, millerdev, AMomchilov
+    * Edited: Lyes Oussaiden
+    * https://github.com/Timvde/UserChrome-Tweaks/blob/master/tabs/hide-tabs-macos.css 
+    */
+
+    /*Repositions window controls, based on a vairety of different screen modes.*/
+    :root:not([uidensity]) #TabsToolbar .titlebar-buttonbox-container { margin-left: 12px; margin-top: 12px; }
+    :root[uidensity="compact"] #TabsToolbar .titlebar-buttonbox-container { margin-left: 10px; margin-top: 9px; }
+    #TabsToolbar .titlebar-buttonbox.titlebar-color { margin-left: 0px !important; }
+    #main-window:not([inFullscreen]) #nav-bar { padding: 0px 0px 0px 70px !important; }
+
+  }
+
+/*SIDEBAR HEADER*/
+  /*Show and hides the sidebar close button depending on whether the sidebar is being hovered on or not.*/
+  #sidebar-header #sidebar-close {
+    transition: all 300ms !important;
+    opacity: 0;
+  }
+  #sidebar-header:hover #sidebar-close {
+    transition: all 300ms !important;
+    opacity: 1;
+  }
+  /*Scales in/out the dropdown arrow beside the sidebar mode switcher.*/
+  #sidebar-switcher-target #sidebar-switcher-arrow {
+    transition: all 300ms !important;
+    opacity: 0 !important;
+    max-width: 0 !important;
+  }
+  #sidebar-switcher-target:hover #sidebar-switcher-arrow {
+    transition: all 300ms !important;
+    opacity: 0.8 !important;
+    max-width: 12px !important;
+  }
+  #sidebar-title {
+    content: "HEE!";
+  }
+
+/*TREE STYLE TABS -- SIDEBAR HEADER*/
+  /*Transitions the background of the TreeStyleTab header to the theme background, and darkens.*/
+  #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+    transition: all 150ms !important;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.7)), var(--lwt-additional-images) !important
+  }
+  /*Transitions the background of the TreeStyleTab header to the default firefox dark mode background when the sidebar header is hovered*/
+  #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header:hover {
+    transition: all 150ms !important;
+    background: rgb(42, 42, 42) !important
+  }
+
+/*SIDEBAR HOVER -- WINDOW LAYOUT*/
+
+  /*Sets the --sidebar-split variable to --sidebar-split-max when the sidebar is hovered.*/
+  #sidebar-box:hover,
+  #sidebar-box:hover ~ #appcontent {
+    --sidebar-split: var(--sidebar-split-max);
+  }
+
+  /*Sets the --sidebar-split-left variable for when the sidebar is positioned on the right side of the screen.*/
+  #sidebar-box[positionend]:hover,
+  #sidebar-box[positionend]:hover ~ #appcontent {
+    --sidebar-split-positionend: calc(var(--sidebar-split-min) - var(--sidebar-split));
+  }
+
+  /*Transitions the width of the sidebar to the --sidebar-split variable.*/
+  #sidebar-box {
+    transition: left 300ms, width 300ms, max-width 300ms !important;
+
+    position: relative;
+
+    width: var(--sidebar-split) !important;
+    max-width: var(--sidebar-split) !important;
+    min-width: 0 !important;
+
+    /*Reposition the sidebar if on the right.*/
+    left: var(--sidebar-split-positionend);
+  }
+
+  /*Disables the sidebar splitter, as the sidebar no-longer needs dynamically resized.*/
+  #sidebar-splitter {
+    display: none !important;
+  }
+  /*Transitions the appcontent window (where websites are displayed) width to the inverse of --sidebar-split.*/
+  :root:not([inDOMFullscreen]) #sidebar-box ~ #appcontent {
+    --target-content-width: calc(100% - var(--sidebar-split-min));
+
+    transition: left 300ms, mask-position 300ms;
+
+    position: relative;
+    overflow-x: hidden;
+
+    max-width: var(--target-content-width) !important;
+    min-width: var(--target-content-width) !important;
+
+    /*Reposition the appcontent if the sidebar is on the right*/
+    left: var(--sidebar-split-positionend);
+  }
+
+/*SIDEBAR HOVER -- SIDEBAR HEADER*/
+  /*Transitions the sidebar switcher dropdown to the centre of the closed width of the sidebar.*/
+  #sidebar-box #sidebar-header #sidebar-switcher-target {
+    transition: all 100ms !important;
+    margin-left: var(--sidebar-switcher-close-margin) !important;
+  }
+  /*Transitions the sidebar switcher dropdown back to the left when the sidebar is hovered open.*/
+  #sidebar-box:hover #sidebar-header #sidebar-switcher-target {
+    transition: all 100ms !important;
+    margin-left: 0px !important;
+  }
+  /*Transitions the max-width of the sidebar switcher text to 0px when the sidebar is closed.*/
+  #sidebar-box #sidebar-header #sidebar-switcher-target #sidebar-title{
+    transition: max-width 450ms !important;
+    max-width: 0px !important;
+  }
+  /*Transitions the max-width of the sidebar switcher text to (arbitrary? Try fix this..) 150px when opened.*/
+  #sidebar-box:hover #sidebar-header #sidebar-switcher-target #sidebar-title{
+    transition: max-width 450ms !important;
+    max-width: 150px !important;
+  }
+
+/*SIDEBAR HOVER -- APPCONTENT 'SHADOW'*/
+  /*Creates a gradient over the html content section, and transitions the gradient off screen*/
+  #sidebar-box:not([positionend]) ~ #appcontent {
+    mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0.25));
+    mask-size: 200%, 100%;
+    mask-position: 0px, 0px;
+    mask-origin: content-box;
+  }
+  /*Transition the gradient so it is visible.*/
+  #sidebar-box:not([positionend]):hover ~ #appcontent {
+    mask-position: -100vw, 0px;
+  }
+
+  /*Creates a gradient over the html content section, and transitions the gradient off screen*/
+  #sidebar-box[positionend] ~ #appcontent {
+    mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0.25));
+    mask-size: 200%, 100%;
+    mask-position: calc(var(--sidebar-split-min) - 100vw), 0px;
+    mask-origin: content-box;
+  }
+  /*Transition the gradient so it is visible.*/
+  #sidebar-box[positionend]:hover ~ #appcontent {
+    mask-position: 0px, 0px;
+  }
