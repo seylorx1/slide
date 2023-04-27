@@ -38,6 +38,11 @@
 
 
 /*WINDOW CONTROLS & TITLEBAR*/
+  /*Adds a gap to the top of the extended url box.*/
+  #urlbar[breakout][breakout-extend] {
+    top: 4px !important;
+  }
+
   /* Detect Windows Firefox 25 or newer */
   @media (-moz-platform: windows) {
 
