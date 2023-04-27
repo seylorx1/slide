@@ -3,7 +3,7 @@
 * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /*Created by Lyes Oussaiden (seylorx1) 2023.*/
-/*Version 2.*/
+/*Version 3.*/
 
 
 
@@ -20,6 +20,8 @@
   --sidebar-split-min: 75px;
   --sidebar-split-max: 300px;
   --sidebar-switcher-close-margin: 16px;
+  --sidebar-duration: 300ms;
+  --sidebar-delay: 200ms;
   /***********************************************************************/
 
   /*These variables to calculate data across elements and are non-configurable.*/
@@ -135,21 +137,21 @@
 /*SIDEBAR HEADER*/
   /*Show and hides the sidebar close button depending on whether the sidebar is being hovered on or not.*/
   #sidebar-header #sidebar-close {
-    transition: all 300ms !important;
+    transition: all var(--sidebar-duration) !important;
     opacity: 0;
   }
   #sidebar-header:hover #sidebar-close {
-    transition: all 300ms !important;
+    transition: all var(--sidebar-duration) !important;
     opacity: 1;
   }
   /*Scales in/out the dropdown arrow beside the sidebar mode switcher.*/
   #sidebar-switcher-target #sidebar-switcher-arrow {
-    transition: all 300ms !important;
+    transition: all var(--sidebar-duration) !important;
     opacity: 0 !important;
     max-width: 0 !important;
   }
   #sidebar-switcher-target:hover #sidebar-switcher-arrow {
-    transition: all 300ms !important;
+    transition: all var(--sidebar-duration) !important;
     opacity: 0.8 !important;
     max-width: 12px !important;
   }
@@ -157,12 +159,12 @@
 /*TREE STYLE TABS -- SIDEBAR HEADER*/
   /*Transitions the background of the TreeStyleTab header to the theme background, and darkens.*/
   #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
-    transition: all 150ms !important;
+    transition: all calc(var(--sidebar-duration) * 0.5) !important;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.7)), var(--lwt-additional-images) !important
   }
   /*Transitions the background of the TreeStyleTab header to the default firefox dark mode background when the sidebar header is hovered*/
   #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header:hover {
-    transition: all 150ms !important;
+    transition: all calc(var(--sidebar-duration) * 0.5) !important;
     background: rgb(42, 42, 42) !important
   }
 
@@ -182,7 +184,7 @@
 
   /*Transitions the width of the sidebar to the --sidebar-split variable.*/
   #sidebar-box {
-    transition: left 300ms, width 300ms, max-width 300ms !important;
+    transition: left var(--sidebar-duration) var(--sidebar-delay), width var(--sidebar-duration) var(--sidebar-delay), max-width var(--sidebar-duration) var(--sidebar-delay) !important;
 
     position: relative;
 
@@ -202,7 +204,7 @@
   :root:not([inDOMFullscreen]) #sidebar-box ~ #appcontent {
     --target-content-width: calc(100% - var(--sidebar-split-min));
 
-    transition: left 300ms, mask-position 300ms;
+    transition: left var(--sidebar-duration) var(--sidebar-delay), mask-position var(--sidebar-duration) var(--sidebar-delay) ;
 
     position: relative;
     overflow-x: hidden;
@@ -217,23 +219,23 @@
 /*SIDEBAR HOVER -- SIDEBAR HEADER*/
   /*Transitions the sidebar switcher dropdown to the centre of the closed width of the sidebar.*/
   #sidebar-box #sidebar-header #sidebar-switcher-target {
-    transition: all 100ms !important;
+    transition: all calc(var(--sidebar-duration) * 0.3) var(--sidebar-delay) !important;
     margin-left: var(--sidebar-switcher-close-margin) !important;
   }
   /*Transitions the sidebar switcher dropdown back to the left when the sidebar is hovered open.*/
   #sidebar-box:hover #sidebar-header #sidebar-switcher-target {
-    transition: all 100ms !important;
+    transition: all calc(var(--sidebar-duration) * 0.3) var(--sidebar-delay) !important;
     margin-left: 0px !important;
   }
   /*Transitions the sidebar switcher text max-width to 0px and opacity to 0 when the sidebar is closed.*/
   #sidebar-box #sidebar-header #sidebar-switcher-target #sidebar-title{
-    transition: max-width 450ms, opacity 450ms !important;
+    transition: max-width calc(var(--sidebar-duration) * 1.5) var(--sidebar-delay), opacity calc(var(--sidebar-duration) * 1.5) var(--sidebar-delay) !important;
     max-width: 0px !important;
     opacity: 0;
   }
   /*Transitions the sidebar switcher text max-width to (arbitrary? Try fix this..) 150px and opacity to 1 when the sidebar is open.*/
   #sidebar-box:hover #sidebar-header #sidebar-switcher-target #sidebar-title{
-    transition: max-width 450ms, opacity 450ms !important;
+    transition: max-width calc(var(--sidebar-duration) * 1.5) var(--sidebar-delay), opacity calc(var(--sidebar-duration) * 1.5) var(--sidebar-delay) !important;
     max-width: 150px !important;
     opacity: 1;
   }
