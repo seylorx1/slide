@@ -100,7 +100,7 @@
   }
 
   /* Detect Mac Firefox 25 or newer */
-  @supports (-moz-platform: macos) {
+  @media (-moz-platform: macos) {
 
     /* This Source Code Form (FOR THIS BLOCK) is subject to the terms of the Mozilla Public
     * License, v. 2.0. If a copy of the MPL was not distributed with this
