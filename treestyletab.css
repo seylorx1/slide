@@ -41,3 +41,12 @@ tab-item[data-contextual-identity-name] .contextual-identity-marker {
   box-shadow: 0px 0px 5px white;
 }
 
+.sidebar tab-label {
+  transition: opacity 300ms;
+  opacity: 0; 
+}
+.sidebar:hover tab-label {
+  transition: opacity 300ms;
+  opacity: 1;
+}
+

@@ -3,7 +3,7 @@
 * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /*Created by Lyes Oussaiden (seylorx1) 2023.*/
-/*Version 1.*/
+/*Version 2.*/
 
 
 
@@ -225,15 +225,17 @@
     transition: all 100ms !important;
     margin-left: 0px !important;
   }
-  /*Transitions the max-width of the sidebar switcher text to 0px when the sidebar is closed.*/
+  /*Transitions the sidebar switcher text max-width to 0px and opacity to 0 when the sidebar is closed.*/
   #sidebar-box #sidebar-header #sidebar-switcher-target #sidebar-title{
-    transition: max-width 450ms !important;
+    transition: max-width 450ms, opacity 450ms !important;
     max-width: 0px !important;
+    opacity: 0;
   }
-  /*Transitions the max-width of the sidebar switcher text to (arbitrary? Try fix this..) 150px when opened.*/
+  /*Transitions the sidebar switcher text max-width to (arbitrary? Try fix this..) 150px and opacity to 1 when the sidebar is open.*/
   #sidebar-box:hover #sidebar-header #sidebar-switcher-target #sidebar-title{
-    transition: max-width 450ms !important;
+    transition: max-width 450ms, opacity 450ms !important;
     max-width: 150px !important;
+    opacity: 1;
   }
 
 /*SIDEBAR HOVER -- APPCONTENT 'SHADOW'*/
